@@ -1,0 +1,113 @@
+LAB 1 - NODE.JS
+Complete solution for Questions 1 and 2
+
+============================================================
+QUESTION 1: CLI-BASED CALCULATOR USING process.argv
+============================================================
+
+File: calculator.js
+
+const args = process.argv.slice(2);
+
+const operation = args[0];
+const num1 = Number(args[1]);
+const num2 = Number(args[2]);
+
+if (!operation || Number.isNaN(num1) || Number.isNaN(num2)) {
+    console.log("Usage: node calculator.js <add|subtract|multiply|divide> <number1> <number2>");
+    process.exit(0);
+}
+
+switch (operation.toLowerCase()) {
+    case "add":
+        console.log("Result:", num1 + num2);
+        break;
+
+    case "subtract":
+        console.log("Result:", num1 - num2);
+        break;
+
+    case "multiply":
+        console.log("Result:", num1 * num2);
+        break;
+
+    case "divide":
+        if (num2 === 0) {
+            console.log("Error: Cannot divide by zero.");
+        } else {
+            console.log("Result:", num1 / num2);
+        }
+        break;
+
+    default:
+        console.log("Invalid operation. Use add, subtract, multiply, or divide.");
+}
+
+
+Example commands:
+node calculator.js add 10 5
+node calculator.js subtract 10 5
+node calculator.js multiply 10 5
+node calculator.js divide 10 5
+
+Expected output examples:
+Result: 15
+Result: 5
+Result: 50
+Result: 2
+
+
+============================================================
+QUESTION 2: CUSTOM MODULE CREATION & REUSABILITY
+============================================================
+
+File 1: isEven.js
+
+function isEven(number) {
+    return number % 2 === 0;
+}
+
+module.exports = isEven;
+
+
+File 2: app.js
+
+const isEven = require("./isEven");
+
+const numbers = [2, 5, 8, 11, 14];
+
+numbers.forEach((number) => {
+    if (isEven(number)) {
+        console.log(number + " is even");
+    } else {
+        console.log(number + " is odd");
+    }
+});
+
+
+Run Question 2 using:
+node app.js
+
+Expected output:
+2 is even
+5 is odd
+8 is even
+11 is odd
+14 is even
+
+
+============================================================
+HOW TO RUN
+============================================================
+
+1. Create a folder named Lab1.
+2. Put calculator.js, isEven.js and app.js inside it.
+3. Open the folder in VS Code.
+4. Open the terminal.
+5. Run Question 1, for example:
+   node calculator.js add 10 5
+
+6. Run Question 2:
+   node app.js
+
+For submission, if the portal accepts only one TXT file, this document contains all required code.

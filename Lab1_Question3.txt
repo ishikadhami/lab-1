@@ -1,0 +1,40 @@
+### LAB 1 — Question 3: Basic HTTP Server using http Module
+
+Requirements
+• Create a server using the built-in http module.
+• Run the server on a custom port.
+• Create routes: /, /about, /contact and an invalid-route 404 response.
+• Display different responses for different URLs.
+• Use a browser or Postman to test the routes.
+
+File: server.js
+const http = require("http");
+const PORT = 3000;
+const server = http.createServer((req, res) => {
+ res.setHeader("Content-Type", "text/plain");
+ if (req.url === "/" && req.method === "GET") {
+ res.statusCode = 200;
+ res.end("Welcome message");
+ } else if (req.url === "/about" && req.method === "GET") {
+ res.statusCode = 200;
+ res.end("About page");
+ } else if (req.url === "/contact" && req.method === "GET") {
+ res.statusCode = 200;
+ res.end("Contact page");
+ } else {
+ res.statusCode = 404;
+ res.end("404 Error: Route not found");
+ }
+});
+server.listen(PORT, () => {
+ console.log(`Server running at http://localhost:${PORT}`);
+});
+
+How to run / test
+• Save server.js and open a terminal in the same folder.
+• Run: node server.js
+• Open http://localhost:3000/ to test the Welcome message.
+• Open http://localhost:3000/about to test the About page.
+• Open http://localhost:3000/contact to test the Contact page.
+• Open any other route, such as http://localhost:3000/test, to test the 404 response.
+• Stop the server with Ctrl+C.
